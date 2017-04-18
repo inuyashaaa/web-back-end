@@ -57,32 +57,31 @@ app.get('/image', (req, res) => {
 });
 
 // Đây là method PUT nhưng để test dễ thì em chuyển thành POST để có thể dùng form bên HTML test kết quả luôn :))
-// app.post("/image", (req, res) => {
-//     var imageInfo = {
-//         name: req.body.name,
-//         imageLink: req.body.imageLink,
-//         description: req.body.description
-//     };
-//     var oldDataFetch = [];
-//     oldDataFetch = imagesController.fetImageCollection();
-//     console.log(oldDataFetch);
-//     oldDataFetch.forEach(data => {
-//         if (imageInfo.name == data.name) {
-//             data.imageLink = imageInfo.imageLink;
-//             data.description = imageInfo.description;
-//         }
-//     });
-//     imagesController.saveImageCollection(oldDataFetch);
-//     res.send('Cập nhật thành công :))');
-// });
+app.put("/image", (req, res) => {
+    var imageInfo = {
+        name: req.body.name,
+        imageLink: req.body.imageLink,
+        description: req.body.description
+    };
+    var oldDataFetch = [];
+    oldDataFetch = imagesController.fetImageCollection();
+    console.log(oldDataFetch);
+    oldDataFetch.forEach(data => {
+        if (imageInfo.name == data.name) {
+            data.imageLink = imageInfo.imageLink;
+            data.description = imageInfo.description;
+        }
+    });
+    imagesController.saveImageCollection(oldDataFetch);
+    res.send('Cập nhật thành công :))');
+});
 
-app.post("/image", (req, res) => {
+app.delete("/image", (req, res) => {
     var imageInfo = {
         name: req.body.name
     };
     var oldDataFetch = [];
     oldDataFetch = imagesController.fetImageCollection();
-    console.log(oldDataFetch);
     oldDataFetch.forEach(data => {
         if (imageInfo.name == data.name) {
             delete data.name;
@@ -91,7 +90,7 @@ app.post("/image", (req, res) => {
         }
     });
     imagesController.saveImageCollection(oldDataFetch);
-    res.send('Cập nhật thành công :))');
+    res.send('Xóa thành công :))');
 });
 //Mo 1 cai port de chay local
 app.listen(6969, (req, res) => {
