@@ -15,7 +15,32 @@ var saveImageCollection = (data) => {
     fs.writeFileSync('imageData.json', JSON.stringify(data));
 }
 
+var updateImageCollection = (dataRequest) => {
+    let oldDataFetch = fetImageCollection();
+    oldDataFetch.forEach(data => {
+        if (dataRequest.name == data.name) {
+            data.imageLink = dataRequest.imageLink;
+            data.description = dataRequest.description;
+        }
+    });
+    saveImageCollection(oldDataFetch);
+}
+
+var deleteImageCollection = (dataRequest) => {
+    let oldDataFetch = fetImageCollection();
+    oldDataFetch.forEach(data => {
+        if (dataRequest.name == data.name) {
+            delete data.name;
+            delete data.imageLink;
+            delete data.description;
+        }
+    });
+    saveImageCollection(oldDataFetch);
+}
+
 module.exports = {
     fetImageCollection: fetImageCollection,
-    saveImageCollection: saveImageCollection
+    saveImageCollection: saveImageCollection,
+    updateImage: updateImageCollection,
+    deleteImage: deleteImageCollection
 }

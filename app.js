@@ -63,16 +63,7 @@ app.put("/image", (req, res) => {
         imageLink: req.body.imageLink,
         description: req.body.description
     };
-    var oldDataFetch = [];
-    oldDataFetch = imagesController.fetImageCollection();
-    console.log(oldDataFetch);
-    oldDataFetch.forEach(data => {
-        if (imageInfo.name == data.name) {
-            data.imageLink = imageInfo.imageLink;
-            data.description = imageInfo.description;
-        }
-    });
-    imagesController.saveImageCollection(oldDataFetch);
+    imagesController.updateImage(imageInfo);
     res.send('Cập nhật thành công :))');
 });
 
@@ -80,16 +71,7 @@ app.delete("/image", (req, res) => {
     var imageInfo = {
         name: req.body.name
     };
-    var oldDataFetch = [];
-    oldDataFetch = imagesController.fetImageCollection();
-    oldDataFetch.forEach(data => {
-        if (imageInfo.name == data.name) {
-            delete data.name;
-            delete data.imageLink;
-            delete data.description;
-        }
-    });
-    imagesController.saveImageCollection(oldDataFetch);
+    imagesController.deleteImage(imageInfo);
     res.send('Xóa thành công :))');
 });
 //Mo 1 cai port de chay local
