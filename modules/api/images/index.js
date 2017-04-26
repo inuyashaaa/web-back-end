@@ -24,6 +24,10 @@ Router.get('/', (req, res) => {
             imagesController.getImagesById(req.query.id).then((result) => {
                 res.send(result)
             });
+        } else if (req.query.name) {
+            imagesController.getImagesByName(req.query.name).then((result) => {
+                res.send(result);
+            });
         } else {
             imagesController.getAllImages().then((result) => {
                 res.send(result)

@@ -19,6 +19,11 @@ var getImagesById = (id) => {
         _id: id
     });
 }
+var getImagesByName = (name) => {
+    return imagesModel.find({
+        name: name
+    });
+}
 var saveImageCollection = (data) => {
     fs.writeFileSync('imageData.json', JSON.stringify(data));
 }
@@ -27,12 +32,15 @@ var updateImageCollectionById = (id, data) => {
         _id: id
     }, data);
 }
-var deleteImageById = (id) =>{
-  return imagesModel.deleteOne({_id:id});
+var deleteImageById = (id) => {
+    return imagesModel.deleteOne({
+        _id: id
+    });
 }
 module.exports = {
     getAllImages,
     getImagesById,
+    getImagesByName,
     saveImageCollection,
     updateImageCollectionById,
     deleteImageById,
