@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 var imagesModel = new Schema({
     id: {
         type: Number,
-        require: true
+        required: true
     },
     name: {
         type: String,
@@ -23,7 +23,9 @@ var imagesModel = new Schema({
         default: 0
     },
     likes: [{
-        likeBy: Number
+        likeBy: {
+            type: Number
+        }
     }],
     comments: [{
         comment: {
@@ -35,5 +37,4 @@ var imagesModel = new Schema({
     }]
 });
 
-
-module.exports = mongoose.model('images', imagesModel );
+module.exports = mongoose.model('images', imagesModel);
